@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Daily Adventure</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to right, #d0e5e7, #89c3c7, #2bd8e435, #1c848f08);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .adventure-section, .calendar-section {
+            flex: 1;
+            min-width: 400px;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(211, 204, 204, 0.663);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .adventure-section h2, .calendar-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #008080;
+        }
+        .adventure-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .adventure {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+            background: #008080;
+            color: white;
+            gap: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .adventure h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: white;
+        }
+        .adventure p {
+            margin: 0;
+            font-size: 1rem;
+            color: white;
+        }
+        .adventure button {
+            align-self: flex-end;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #FF7F00;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .adventure button a{
+            color:aliceblue;
+            text-decoration: none;
+        }
+
+        .adventure button:hover {
+            background: #008080;
+        }
+        .calendar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .calendar-header button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #008080;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .calendar-header button:hover {
+            background: #FF7F00;
+        }
+        .calendar-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #FF7F00;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+        .calendar-day {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-size: 1rem;
+            color: black;
+        }
+        .calendar-day.selected {
+            background: #FF7F00;
+            color: white;
+        }
+        .calendar-day:hover {
+            background: #008080;
+            color: white;
+        }
+        .weekday-labels {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #008080;
+        }
+        .back-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #FF7F00;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.back-button:hover {
+    background: #008080;
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="goBack()" class="back-button">Go Back</button><br><br><br><br>
+
+<div class="container">
+    <!-- Daily Adventure Section -->
+    <div class="adventure-section">
+        <h2>Daily Adventure Available</h2>
+        <div class="adventure-list" id="adventureList"></div>
+    </div>
+
+    <!-- Calendar Section -->
+    <div class="calendar-section">
+        <h2>Calendar</h2>
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prevMonth">&lt;</button>
+                <h3 id="currentMonth"></h3>
+                <button id="nextMonth">&gt;</button>
+            </div>
+            <div class="weekday-labels">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const adventures = {
+        land: ["Mountain Trekking", "Forest Hiking", "Desert Safari", "Cave Exploration", "Rock Climbing", "Wildlife Safari"],
+        water: ["River Rafting", "Scuba Diving", "Snorkeling", "Fishing", "Kayaking", "Waterfall Rappelling"],
+        air: ["Paragliding", "Hot Air Balloon", "Skydiving", "Helicopter Ride", "Bungee Jumping", "Gliding"]
+    };
+
+    const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    let selectedDate = new Date();
+
+    function updateAdventures(date) {
+    const dayIndex = date.getDay();
+    const adventureList = document.getElementById("adventureList");
+    adventureList.innerHTML = `
+        <div class="adventure">
+            <h4>Land Adventure</h4>
+            <p>${adventures.land[dayIndex % adventures.land.length]}</p>
+            
+            <button onclick="alert('Booked Land Adventure: ${adventures.land[dayIndex % adventures.land.length]}')"><a href="booking.html">Book Now</a></button>
+        </div>
+        <div class="adventure">
+            <h4>Water Adventure</h4>
+            <p>${adventures.water[dayIndex % adventures.water.length]}</p>
+            <button onclick="alert('Booked Water Adventure: ${adventures.water[dayIndex % adventures.water.length]}')"><a href="booking.html">Book Now</a></button>
+        </div>
+        <div class="adventure">
+            <h4>Air Adventure</h4>
+            <p>${adventures.air[dayIndex % adventures.air.length]}</p>
+            <button onclick="alert('Booked Air Adventure: ${adventures.air[dayIndex % adventures.air.length]}')"><a href="booking.html">Book Now</a></button>
+        </div>
+    `;
+}
+
+function generateCalendar(date) {
+    const calendarGrid = document.getElementById("calendarGrid");
+    calendarGrid.innerHTML = "";
+
+    const currentMonth = date.getMonth();
+    const currentYear = date.getFullYear();
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    document.getElementById("currentMonth").innerText = `${date.toLocaleString('default', { month: 'long' })} ${currentYear}`;
+
+    // Fill empty days at the start of the month
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDay = document.createElement("div");
+        calendarGrid.appendChild(emptyDay);
+    }
+
+    // Fill days in the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement("div");
+        dayElement.classList.add("calendar-day");
+        dayElement.innerText = day;
+
+        const thisDate = new Date(currentYear, currentMonth, day);
+        if (thisDate.toDateString() === selectedDate.toDateString()) {
+            dayElement.classList.add("selected");
+        }
+
+        dayElement.addEventListener("click", () => {
+            selectedDate = thisDate;
+            updateAdventures(selectedDate);
+            generateCalendar(selectedDate);
+        });
+
+        calendarGrid.appendChild(dayElement);
+    }
+}
+
+
+    document.getElementById("prevMonth").addEventListener("click", () => {
+        selectedDate.setMonth(selectedDate.getMonth() - 1);
+        generateCalendar(selectedDate);
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", () => {
+        selectedDate.setMonth(selectedDate.getMonth() + 1);
+        generateCalendar(selectedDate);
+    });
+
+    // Initial setup
+    updateAdventures(selectedDate);
+    generateCalendar(selectedDate);
+</script>
+<script>
+    function goBack() {
+        window.location.href = "index.html"; // Redirects to index.html
+    }
+</script>
+
+</body>
+</html>

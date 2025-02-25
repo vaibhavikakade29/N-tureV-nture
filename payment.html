@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Beyond Limits Adventure Website.</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family:'Times New Roman', Times, serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .qr-code img {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .payment-options img {
+            width: 50px;
+            height: auto;
+        }
+        .btn-pay {
+            background-color: #6fd2a7;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .payment-success {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #28a745;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Scan to Pay via PhonePe, GPay, or Paytm</h2>
+    <div class="qr-code">
+        <img src="img/qr.jpg" alt="QR Code">
+    </div>
+    <div class="payment-options">
+        <img src="img/gpay.png" alt="GPay">
+        <img src="img/paytm.png" alt="Paytm">
+        <img src="img/PhonePay.png" alt="PhonePe">
+    </div>
+    <button class="btn-pay" onclick="showSuccessMessage()"> Payment</button>
+    
+    <div id="paymentSuccess" class="payment-success">
+        <p>Payment done Successfully!</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const totalAmount = urlParams.get('total');
+        if (totalAmount) {
+            // Display total amount at the top of the page
+            document.querySelector('.container').insertAdjacentHTML('afterbegin', '<p>Total Amount: ₹' + totalAmount + '</p>');
+        }
+    });
+
+    function showSuccessMessage() {
+        const totalAmount = new URLSearchParams(window.location.search).get('total');
+        alert('Payment done Successfully! ' );
+        document.getElementById('paymentSuccess').style.display = 'block';
+        
+        // Redirect to review.html after 2 seconds
+        setTimeout(function() {
+            window.location.href = "review.php";
+        }, 2000); // 2000 milliseconds = 2 seconds
+    }
+</script>
+
+</body>
+</html>

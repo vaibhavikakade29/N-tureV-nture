@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Thank You!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        /* New background color */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #d0e5e7, #89c3c7, #2bd8e435, #1c848f08);
+            color: white;
+            text-align: center;
+        }
+
+        .thank-you-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px 40px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            background: #ff5733;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #ff2e00;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <h1>Thank You for Visiting! 🚀</h1>
+        <p>Your next adventure awaits... Stay tuned for exciting updates!</p>
+        <a href="index.html" class="btn" onclick="showMessage()">Back to Homepage</a>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert("🌟 Welcome Back, Explore more 🚀\nThe journey doesn’t end here. Stay curious, stay adventurous!");
+        }
+    </script>
+</body>
+</html>
