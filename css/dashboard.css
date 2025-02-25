@@ -1,0 +1,337 @@
+
+/* General Styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Times New Roman', serif; 
+}
+
+body {
+display: flex;
+height: 100vh;
+background-color: #f4f7f6;
+}
+
+.wrapper {
+display: flex;
+width: 100%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+width: 290px;
+background-color: #1e272e;
+padding: 20px;
+color: #ecf0f1;
+display: flex;
+flex-direction: column;
+}
+
+.sidebar-header {
+text-align: center;
+margin-bottom: 30px;
+}
+
+.sidebar-header .logo {
+width: 190px;
+height: auto;
+border-radius: 50%;
+}
+
+.sidebar-header h5 {
+font-size: 14px;
+margin-top: 15px;
+color: #f7b731;
+}
+
+.sidebar-menu {
+list-style-type: none;
+padding-top: 20px;
+}
+
+.sidebar-menu li {
+margin-bottom: 20px;
+}
+
+.sidebar-menu a {
+color: #ecf0f1;
+text-decoration: none;
+font-size: 18px;
+display: block;
+padding: 12px 10px;
+border-radius: 8px;
+transition: background 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+background-color: #576574;
+}
+
+.submenu ul {
+display: none;
+list-style-type: none;
+padding-left: 20px;
+}
+
+.submenu.active ul {
+display: block;
+}
+
+/* Main Content */
+.main-content {
+flex-grow: 1;
+padding: 30px;
+background-color: #f4f7f6;
+overflow-y: auto;
+}
+
+header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+header h1 {
+font-size: 28px;
+color: #2c3e50;
+}
+/* Main Content */
+.main-content {
+flex-grow: 1;
+padding: 30px;
+background-color: #f4f7f6;
+overflow-y: auto;
+}
+
+/* Header Styles */
+header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+header h1 {
+font-size: 28px;
+color: #2c3e50;
+}
+
+/* Summary Section */
+.summary {
+margin-bottom: 40px;
+}
+
+.summary h2 {
+font-size: 24px;
+color: #2c3e50;
+margin-bottom: 20px;
+text-align: left; /* Aligning text to the left */
+}
+
+.summary-stats {
+display: flex;
+justify-content: space-between; /* Distributes space between summary stats */
+}
+
+.summary-stat {
+flex: 1;
+background-color: #ffffff; /* White background for summary stats */
+border: 1px solid #dfe6e9; /* Light border */
+border-radius: 8px; /* Rounded corners */
+padding: 20px;
+text-align: center;
+margin: 0 10px; /* Margins for spacing */
+transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition for smooth effect */
+}
+
+.summary-stat:hover {
+background-color: #bac1c2; /* Light grey background on hover */
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.summary-stat h3 {
+font-size: 18px;
+color: #2c3e50;
+margin-bottom: 10px;
+}
+
+.summary-stat p {
+font-size: 24px;
+color: #27ae60; /* Green color for stats */
+}
+
+/* Stats Section */
+.stats {
+display: flex;
+justify-content: space-between; /* Distributes space between stats boxes */
+flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.stat-box {
+flex: 1;
+background-color: #ffffff; /* White background for stats boxes */
+border: 1px solid #dfe6e9; /* Light border */
+border-radius: 8px; /* Rounded corners */
+padding: 20px;
+margin: 10px; /* Margins for spacing */
+text-align: center;
+transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition for smooth effect */
+}
+
+.stat-box:hover {
+background-color: #b7b7b7; /* Light grey background on hover */
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.stat-box h3 {
+font-size: 18px;
+color: #2c3e50;
+margin-bottom: 10px;
+}
+
+.stat-box p {
+font-size: 24px;
+color: #3498db; /* Blue color for stats */
+}
+
+/* Charts Section */
+.charts {
+display: flex;
+justify-content: space-between; /* Distributes space between chart boxes */
+flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.chart-box {
+flex: 1;
+background-color: #ffffff; /* White background for chart boxes */
+border: 1px solid #dfe6e9; /* Light border */
+border-radius: 8px; /* Rounded corners */
+padding: 20px;
+margin: 10px; /* Margins for spacing */
+text-align: center;
+max-width: 48%; /* Ensures two charts fit side by side */
+}
+
+.chart-box h3 {
+font-size: 18px;
+color: #2c3e50;
+margin-bottom: 10px;
+}
+
+.chart-placeholder {
+background-color: #ecf0f1; /* Light grey background for the chart placeholder */
+height: 200px; /* Height for the chart placeholder */
+display: flex;
+align-items: center;
+justify-content: center;
+color: #7f8c8d; /* Grey color for text */
+}
+
+.canvas-container {
+position: relative;
+height: 300px; /* Ensure the chart is visible and properly sized */
+margin-top: 10px; /* Add some margin above the chart */
+}
+/* Table Styles */
+table {
+width: 100%;
+border-collapse: collapse; /* Ensure borders are merged */
+margin-bottom: 20px; /* Spacing below the table */
+}
+
+/* Table header styling */
+thead th {
+background-color: #f4f4f4; /* Light gray background for headers */
+color: #333; /* Dark text color for readability */
+padding: 12px;
+border-bottom: 2px solid #ddd; /* Thicker border for header */
+}
+
+/* Table cell styling */
+tbody td {
+padding: 12px 10px; /* More padding for cleaner look */
+border-bottom: 1px solid #ddd; /* Light border for cells */
+}
+
+/* Button Styles */
+button {
+background-color: #f7b731;
+color: #fff;
+border: none;
+padding: 10px 15px;
+border-radius: 5px;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+button:hover {
+background-color: #f39c12; /* Darker shade on hover */
+}/* Add New Book Section - Increased Box Size */
+section#addBookForm {
+background-color: #f4f4f9; /* Light background color */
+padding: 20px;
+border-radius: 10px; /* Rounded corners */
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for better look */
+max-width: 600px; /* Increase the width of the box */
+margin: 0 auto; /* Center the box */
+}
+
+section#addBookForm h2 {
+color: #2c3e50; /* Darker title color */
+text-align: center; /* Center the heading */
+}
+
+section#addBookForm table {
+width: 100%; /* Make the table take full width of the box */
+}
+
+section#addBookForm input {
+width: 100%; /* Full width input boxes */
+padding: 10px; /* Add some padding */
+margin-bottom: 15px; /* Space between input fields */
+border: 1px solid #ccc; /* Border for input fields */
+border-radius: 5px; /* Rounded corners for input */
+}
+
+/* List of Books Section - Add Color */
+section h2 {
+color: #2c3e50; /* Title color */
+}
+
+section table {
+width: 100%;
+border-collapse: collapse;
+}
+
+thead th {
+background-color: #34495e; /* Dark header background */
+color: #fff; /* White text for headers */
+padding: 12px;
+}
+
+tbody td {
+background-color: #ecf0f1; /* Light gray background for table rows */
+color: #2c3e50; /* Dark text color */
+padding: 12px;
+border-bottom: 1px solid #ddd; /* Light border between rows */
+}
+
+/* Add hover effect for table rows */
+tbody tr:hover {
+background-color: #bdc3c7; /* Slightly darker gray on hover */
+}
+
+/* Button Styles */
+button {
+background-color: #f7b731;
+color: #fff;
+border: none;
+padding: 10px 15px;
+border-radius: 5px;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+button:hover {
+background-color: #f39c12; /* Darker shade on hover */
+}
+
+
